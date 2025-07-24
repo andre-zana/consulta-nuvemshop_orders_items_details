@@ -1,0 +1,23 @@
+select
+    nuo.contact_email as email,
+    nuo.created_at as data,
+    nuo.payment_status as status_pagamento,
+    nuo.paid_at as data_pagamento,
+    nuo.shipping_status as status_envio,
+    nuo.shipped_at as data_envio,
+    nuo.total,
+    nuo.contact_identification as CPF,
+    nuo.contact_name as nome,
+    nuo.billing_address as endereco,
+    nuo.billing_number as numero,
+    nuo.billing_floor as complemento,
+    nuo.billing_locality as bairro,
+    nuo.billing_zipcode as CEP,
+    nuo.billing_city as cidade,
+    p.product.name as produto,
+    p.product.sku as SKU,
+    nuo.gateway_id as ID_transacao
+from nuvemshop.orders nuo
+CROSS JOIN UNNEST(products) AS p (product)
+where year in ('2025', '2024')
+and billing_city = 'Brasília'
